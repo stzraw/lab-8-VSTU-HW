@@ -9,6 +9,7 @@ int task1a();
 int task2();
 int task3();
 
+int stroka(int n, char c1, char c2);
 int summa(int m, int n);
 double stepen(int i);
 double tabf(double x);
@@ -17,6 +18,7 @@ double ryad(double a, int n);
 int main()
 {
     setlocale(LC_ALL, ".UTF8");
+
     task0();
     task1();
     task1a();
@@ -27,7 +29,7 @@ int main()
 
 int task0()
 {
-    int n, i;
+    int n;
     char c1, c2;
 
     printf("Задание 0:\n");
@@ -36,21 +38,7 @@ int task0()
     printf("Введите первый и второй символ: ");
     scanf(" %c %c", &c1, &c2);
 
-    putchar('+');
-    for (i = 1; i <= n; i++)
-    {
-        if (i <= n / 2)
-        {
-            putchar(c1);
-        }
-        else
-        {
-            putchar(c2);
-        }
-        putchar('!');
-    }
-    putchar('+');
-    putchar('\n');
+    stroka(n, c1, c2);
     return 0;
 }
 
@@ -105,7 +93,7 @@ int task2()
     printf("|   x   |    f(x)   |\n");
     printf("---------------------\n");
 
-    for (x = a; x <= b + 1e-9; x += h)
+    for (x = a; x <= b + 0.0001; x += h)
     {
         y = tabf(x);
         printf("| %5.2lf | %9.4lf |\n", x, y);
@@ -134,6 +122,28 @@ int task3()
         res = ryad(a, n);
         printf("Сумма ряда: %.6lf\n", res);
     }
+    return 0;
+}
+
+int stroka(int n, char c1, char c2)
+{
+    int i;
+
+    putchar('+');
+    for (i = 1; i <= n; i++)
+    {
+        if (i <= n / 2)
+        {
+            putchar(c1);
+        }
+        else
+        {
+            putchar(c2);
+        }
+        putchar('!');
+    }
+    putchar('+');
+    putchar('\n');
     return 0;
 }
 
