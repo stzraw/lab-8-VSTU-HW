@@ -28,9 +28,9 @@
 5. **Конец**.
 
 ### Блок-схема
-![Блок-схема алгоритма](lab_8_schema.png) 
+![Блок-схема алгоритма](pravki8.drawio.png) 
 
-https://github.com/stzraw/lab-8-VSTU-HW/blob/main/lab_8_schema.png
+https://github.com/stzraw/lab-8-VSTU-HW/blob/main/pravki8.drawio.png
 
 ## 2. Реализация программы
 
