@@ -3,13 +3,7 @@
 #include <locale.h>
 #include <math.h>
 
-int task0();
-int task1();
-int task1a();
-int task2();
-int task3();
-
-int stroka(int n, char c1, char c2);
+char stroka(int i, int n, char c1, char c2);
 int summa(int m, int n);
 double stepen(int i);
 double tabf(double x);
@@ -17,146 +11,129 @@ double ryad(double a, int n);
 
 int main()
 {
+    int n0, i;
+    char c1, c2, ch;
+    int m1, n1, s;
+    int degn, limitm;
+    double res, lastres, resk;
+    double a2, b2, h, x, y;
+    double a3, res3;
+    int n3;
+
     setlocale(LC_ALL, ".UTF8");
-
-    task0();
-    task1();
-    task1a();
-    task2();
-    task3();
-    return 0;
-}
-
-int task0()
-{
-    int n;
-    char c1, c2;
 
     printf("Задание 0:\n");
     printf("Введите количество символов: ");
-    scanf("%d", &n);
+    scanf("%d", &n0);
     printf("Введите первый и второй символ: ");
     scanf(" %c %c", &c1, &c2);
 
-    stroka(n, c1, c2);
-    return 0;
-}
-
-int task1()
-{
-    int m, n, s;
+    putchar('+');
+    for (i = 1; i <= n0; i++)
+    {
+        ch = stroka(i, n0, c1, c2);
+        putchar(ch);
+        putchar('!');
+    }
+    putchar('+');
+    putchar('\n');
 
     printf("\nЗадание 1:\n");
     printf("Введите m и n (m >= n): ");
-    scanf("%d %d", &m, &n);
+    scanf("%d %d", &m1, &n1);
 
-    s = summa(m, n);
-
+    s = summa(m1, n1);
     printf("результат %d\n", s);
-    return 0;
-}
 
-int task1a()
-{
-    int m, i;
-    double res, resk;
-
-    printf("\nЗадание 1А:\n");
-    printf("Введите степень m: ");
-    scanf("%d", &m);
+    printf("\nЗадание 1А (по показателю степени n):\n");
+    printf("Введите степень n: ");
+    scanf("%d", &degn);
 
     res = 1.0;
-    for (i = 0; i <= m; i++)
+    for (i = 0; i <= degn; i++)
     {
         res = stepen(i);
         printf("2^%2d = %10.0lf\n", i, res);
     }
-
     resk = res / 1024.0;
     printf("Результат: %.1lfK\n", resk);
-    return 0;
-}
 
-int task2()
-{
-    double a, b, h, x, y;
+    printf("\nЗадание 1А (до заданного числа m):\n");
+    printf("Введите предельное целое число m (m >= 1): ");
+    scanf("%d", &limitm);
 
-    a = 0.2;
-    b = 2.2;
+    lastres = 1.0;
+    for (i = 0; stepen(i) <= (double)limitm; i++)
+    {
+        lastres = stepen(i);
+        printf("2^%2d = %10.0lf\n", i, lastres);
+    }
+    resk = lastres / 1024.0;
+    printf("Результат: %.1lfK\n", resk);
 
     printf("\nЗадание 2:\n");
+    a2 = 0.2;
+    b2 = 2.2;
     printf("Функция: y = 1.8 * x^2 - sin(10 * x) на интервале [0.2; 2.2]\n");
-    printf("Введите шаг табуляции: ");
+    printf("Введите шаг табуляции (h > 0): ");
     scanf("%lf", &h);
 
-    printf("_____________________\n");
-    printf("|   x   |    f(x)   |\n");
-    printf("---------------------\n");
-
-    for (x = a; x <= b + 0.0001; x += h)
+    if (h <= 0.0)
     {
-        y = tabf(x);
-        printf("| %5.2lf | %9.4lf |\n", x, y);
+        printf("Ошибка: шаг табуляции должен быть больше 0\n");
     }
-    printf("---------------------\n");
-    return 0;
-}
+    else
+    {
+        printf("_____________________\n");
+        printf("|   x   |    f(x)   |\n");
+        printf("---------------------\n");
 
-int task3()
-{
-    double a, res;
-    int n;
+        for (x = a2; x <= b2 + 0.0001; x += h)
+        {
+            y = tabf(x);
+            printf("| %5.2lf | %9.4lf |\n", x, y);
+        }
+        printf("---------------------\n");
+    }
 
     printf("\nЗадание 3 (ДЗ):\n");
     printf("Введите число a (a != 0): ");
-    scanf("%lf", &a);
+    scanf("%lf", &a3);
     printf("Введите целое число n (n >= 0): ");
-    scanf("%d", &n);
+    scanf("%d", &n3);
 
-    if (a == 0.0 || n < 0)
+    if (a3 == 0.0 || n3 < 0)
     {
         printf("Ошибка: некорректные входные данные\n");
     }
     else
     {
-        res = ryad(a, n);
-        printf("Сумма ряда: %.6lf\n", res);
+        res3 = ryad(a3, n3);
+        printf("Сумма ряда: %.6lf\n", res3);
     }
     return 0;
 }
 
-int stroka(int n, char c1, char c2)
+char stroka(int i, int n, char c1, char c2)
 {
-    int i;
-
-    putchar('+');
-    for (i = 1; i <= n; i++)
+    if (i <= n / 2)
     {
-        if (i <= n / 2)
-        {
-            putchar(c1);
-        }
-        else
-        {
-            putchar(c2);
-        }
-        putchar('!');
+        return c1;
     }
-    putchar('+');
-    putchar('\n');
-    return 0;
+    else
+    {
+        return c2;
+    }
 }
 
 int summa(int m, int n)
 {
-    int i, s, k;
+    int i, s;
 
     s = 0;
-    k = 1;
     for (i = m; i >= n; i--)
     {
         s += i;
-        printf("выполнено %d раз\n", k++);
     }
     return s;
 }
